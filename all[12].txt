@@ -1,0 +1,609 @@
+installation of mysql
+   sudo dnf update
+• To install MySQL, utilize the given command
+   sudo dnf install community-mysql-server
+To check the current status of the MySQL service, utilize the given command:
+   systemctl status mysqld
+We will be using the following command to start the MySQL service:
+   sudo systemctl start mysqld
+Now, let’s cross-check whether we have successfully started MySQL by using 
+the given command:
+   systemctl status mysqld
+Open new window and execute programs on mysql:
+   sudo mysq
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+installation of mongodb
+sudo vi /etc/yum.repos.d/mongodb.repo 
+
+Add the below content
+
+[Mongodb]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/8/mongodb-org/4.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
+
+do not press any of the key and directly type :wq
+Install MongoDB on 
+Fedora
+	sudo dnf install mongodb-org mongodb-org-serve
+
+Start MongoDB Service
+	sudo systemctl enable mongod.service
+	sudo systemctl start mongod.service
+
+open new window and type – mongo
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+lab titles 
+lab 2a
+Design and Develop SQL DDL statements which demonstrate the use of 
+SQL objects such as Table, View, Index, Sequence, Synonym
+========================================================================
+lab 2b
+Design at least 10 SQL queries for suitable database application using SQL DML statements: Insert, Select, Update, Delete with operators, functions, and set operator.
+=====================================================================================================================================================================
+lab 3a
+Design at least 10 SQL queries for suitable database application using SQL DML statements: all types of Join, Sub-Query and View
+=================================================================================================================================
+lab 4a
+Unnamed PL/SQL code block: Use of Control structure and Exception handling is mandatory.
+===================================================================================================================
+lab 5a
+PL/SQL Stored Procedure and Stored Function.
+Write a Stored Procedure namely proc_Grade for the categorization of
+student. If marks scored by students in examination is &lt;=1500 and
+marks&gt;=990 then student will be placed in distinction category if marks
+scored are between 989 and900 category is first class, if marks 899 and
+825 category is Higher Second Class.
+Write a PL/SQL block for using procedure created with above
+requirement.
+Stud_Marks(name, total_marks)
+Result(Roll,Name, Class)
+Frame the separate problem statement for writing PL/SQL Stored
+Procedure and function, inline with above statement. The problem
+statement should clearly state the requirements.
+==================================================================================================================
+lab 6a
+Write a PL/SQL block of code using parameterized cursor that will merge the data available in newly created table N_RollCall with the data available in the O_RollCall. If the data in the first table already exists in the second table then that data should be skipped.
+============================================================================================================================================================================================
+lab 7a
+Database Trigger (All Types: Row level and Statement level triggers, Before and After Triggers). Write a database trigger on Library table. The System should keep track of the records that are being updated or deleted. The old value of updated or deleted records should be added in Library_Audit table.Frame the problem statement for writing Database Triggers of all types, in-line with above statement. The problem statement should clearly state the requirements.
+======================================================================================================================================================================
+B lab B-1
+Design and Develop MongoDB Queries using CRUD operations. (Use CRUD operations, SAVE method, logical operators)
+
+
+-----------------------------------------------------------------------------------------------
+starting mysql
+
+1. systemctl status mysqld
+2. sudo systemctl start mysqld
+3. systemctl status mysqld
+
+Open new window and execute programs on mysql:
+sudo mysql
+---------------------------------------------------------------------------------------------------------------
+
+Lab Assignment No. 2 (A)
+Design and Develop SQL DDL statements which demonstrate the use of 
+SQL objects such as Table, View, Index, Sequence, Synonym
+
+
+1. use db;
+
+2. show tables; 
+
+
+3. create table client_master(client_no int,client_name varchar(20),address varchar(50),city varchar(10),pincode int,state varchar(20), bal_due float,primary key(client_no));
+
+
+insert into client_master values('001','abhi','nasik','nasik','422004','MH','5000');
+insert into client_master values('002','piyu','nasik','nasik','422004','MH','10000');
+insert into client_master values('003','abd','nasik','nasik','422003','MH','5000');
+insert into client_master values('004','abd','nasik','nasik','422003','MH','5000');
+insert into client_master values('005','abc','nasik','nasik','422003','MH','5000');
+
+
+select * from client_master;
+
+
+select client_name,client_no from client_master;
+
+
+insert into client_master values('006','xyz','nasik','nasik','422004','MH','6000');
+
+
+select client_name,client_no from client_master;
+
+create table product_master(product_no int,description varchar(20),
+profit_per float,unit_measure varchar(10),quantity int,
+reorder int,sell_price float,cost_price float,primary key(product_no));
+
+
+insert into product_master values('001','shampoo','1','one','4','2','10','15');
+insert into product_master values('002','oil','13','one','4','2','11','16');
+
+alter table client_master add telephone_no int;
+
+
+select * from client_master;
+
+
+
+select * from product_master;
+
+create index client_search on client_master(client_no);
+
+
+create table auto(roll_no int NOT NULL AUTO_INCREMENT,name varchar(20),primary key(roll_no));
+
+select * from auto;
+
+insert into auto values('1','abc'); 
+insert into auto values('2','adc'); 
+
+
+alter table auto auto_increment=100;
+
+select * from auto;
+
+insert into auto values(null,'abd');
+
+select * from auto;
+
+insert into auto values(null,'reh'); 
+
+
+select * from auto;
+
+update client_master set client_name="nut" where client_no='4';
+
+select * from client_master;
+
+
+create index client_find on client_master(client_name,city);
+
+
+show tables;
+
+
+select * from product_master;
+
+
+desc product_master;
+
+
+alter table client_master rename to c_master;
+
+insert into product_master values('003','nutela','15','three','40','5','110','123');
+
+alter table product_master modify sell_price float(10,2);
+
+desc product_master;
+
+create view client as select client_no,client_name from c_master;
+
+select * from client;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lab Group A no- 2B
+Design at least 10 SQL queries for suitable database application using SQL DML statements: Insert, Select, Update, Delete with operators, functions, and set operator.
+
+show databases;
+
+use db;
+
+create table Employee(emp_no int, emp_name varchar(20), date date, position varchar(20));
+
+alter table Employee add salary int;
+
+insert into Employee values('01', 'abc', '2018-07-11', 'clerk', '50000');
+insert into Employee values('02', 'abhi', '2018-05-11', 'ceo', '150000');
+
+
+create table TE(emp_no int, emp_name varchar(20), join_date date, position varchar(20), salary int);
+
+insert into TE values('01', 'abc', '2018-07-11', 'clerk', '50000');
+insert into TE values('02', 'abhi', '2018-05-11', 'ceo', '150000');
+
+select * from TE;
+
+select * from Employee;
+
+update TE set emp_name = 'gjgj' where emp_no = '5';
+
+select * from TE;
+
+select * from Employee union select * from TE;
+
+select * from Employee union all select * from TE;
+
+
+select distinct emp_no from Employee where emp_no in (select emp_no from TE);
+
+select * from Employee;
+
+select distinct emp_name from Employee where emp_name in (select emp_name from TE);
+
+select * from TE;
+
+
+select min(salary) from Employee;
+select max(salary) from Employee;
+select sum(salary) from Employee;
+select avg(salary) from Employee;
+select count(salary) from Employee;
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+group A- 3 
+Design at least 10 SQL queries for suitable database application using SQL DML statements: all types of Join, Sub-Query and View
+
+
+
+show databases;
+use Abhi;
+show tables;
+
+
+create table _master(product_no int, description varchar(20), profit_per float, unit_measure varchar(10), quantity int, reorder int, sell_price float, cost_price float, primary key(product_no));
+
+
+create table customer(cust_no int, cust_name varchar(20), cust_add varchar(20), phone_no int, primary key(cust_no));
+create table capital(cap_no int, cap_name varchar(20), state_no int, primary key(cap_no));
+
+create table state(state_no int, state_name varchar(20), state_code int, capital varchar(20), primary key(state_no));
+
+insert into capital (cap_no, cap_name, state_no) values ('01', 'MH', '01');
+insert into capital (cap_no, cap_name, state_no) values ('02', 'RAJ', '02');
+insert into capital (cap_no, cap_name, state_no) values ('03', 'GOA', '03');
+insert into capital (cap_no, cap_name, state_no) values ('04', 'GUJ', '04');
+insert into capital (cap_no, cap_name, state_no) values ('05', 'KAR', '05');
+
+insert into state (state_no, state_name, state_code, capital) values ('01', 'MH', '01', 'MUM');
+insert into state (state_no, state_name, state_code, capital) values ('02', 'RAJ', '02', 'JAI');
+insert into state (state_no, state_name, state_code, capital) values ('03', 'GOA', '03', 'PAN');
+insert into state (state_no, state_name, state_code, capital) values ('04', 'GUJ', '04', 'SUR');
+insert into state (state_no, state_name, state_code, capital) values ('05', 'KAR', '05', 'BAN');
+
+select * from capital;
+select * from state;
+
+select capital.cap_no, state.state_no from capital inner join state on capital.cap_no = state.state_no;
+
+
+UPDATE state SET state_no = "78" where state_no = '01';
+UPDATE state SET state_no = "58" where state_no = '02';
+UPDATE state SET state_no = "46" where state_no = '03';
+UPDATE state SET state_no = "489" where state_no = '04';
+UPDATE state SET state_no = "458" where state_no = '05';
+
+insert into state (state_no, state_name, state_code, capital) values ('05', 'MP', '05', 'BHO');
+
+select capital.cap_no, state.state_no from capital inner join state on capital.cap_no = state.state_no;
+select capital.cap_no, state.state_no from capital left join state on capital.cap_no = state.state_no;
+select capital.cap_no, state.state_no from capital left join state on capital.cap_no = state.state_name;
+select capital.cap_no, state.state_no from capital right join state on capital.cap_no = state.state_no;
+
+select * from capital;
+select * from state;
+
+select capital.cap_no, state.state_no from capital inner join state on capital.cap_no = state.state_no;
+select capital.cap_no, capital.cap_name, state.capital, state.state_no from capital inner join state on capital.cap_no = state.state_no;
+
+select capital.cap_no, capital.cap_name, state.capital, state.state_no from capital left join state on capital.cap_no = state.state_no;
+
+select capital.cap_no, capital.cap_name, state.capital, state.state_no from capital right join state on capital.cap_no = state.state_no;
+
+select capital.cap_no, capital.cap_name, state.capital, state.state_no from capital left join state on capital.cap_no = state.state_no union select capital.cap_no, capital.cap_name, state.capital, state.state_no from capital right join state on capital.cap_no = state.state_no;
+
+select * from capital c1, state s1 where c1.cap_no = s1.state_no;
+select * from capital c1, state s1 where c1.cap_no != s1.state_no;
+
+select * from state where state_no = (select state_no from state where state_name = 'MH');
+select * from state where state_no = (select state_no from state where state_name = 'GUJ');
+select * from state where state_no = (select capital.state_no from capital where cap_name = 'MH');
+select * from state where state_no = (select capital.state_no from capital where cap_name = 'GUJ');
+select * from state where state_no = (select capital.state_no from capital where cap_name = 'RAJ');
+select * from state where state_no = (select capital.state_no from capital where cap_name = 'KAR');
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+Group A- 4 Unnamed PL/SQL code block: Use of Control structure and Exception handling is mandatory.
+
+
+create table borrower(rollno int primary key, name varchar(20), dateofissue date, nameofbook varchar(20), status varchar(20));
+
+create table fine(rollno int, foreign key(rollno) references borrower(rollno), returndate date, amount int);
+
+
+insert into borrower values(1, 'abc', '2021-06-01', 'SEPM', 'I');
+insert into borrower values(2, 'xyz', '2021-05-01', 'OOP', 'I');
+insert into borrower values(3, 'pqr', '2021-06-15', 'DBMS', 'I');
+insert into borrower values(4, 'def', '2021-06-30', 'DSA', 'I');
+insert into borrower values(5, 'lmn', '2021-07-05', 'ADS', 'I');
+
+
+
+delimiter $
+create procedure calc_fine_lib(in roll int)
+begin
+  declare fine1 int;
+  declare noofdays int;
+  declare issuedate date;
+  declare exit handler for SQLEXCEPTION select 'create table definition';
+  
+  select dateofissue into issuedate from borrower where rollno = roll;
+  select datediff(curdate(), issuedate) into noofdays;
+  
+  if noofdays > 15 and noofdays <= 30 then
+    set fine1 = noofdays * 5;
+    insert into fine values(roll, curdate(), fine1);
+  elseif noofdays > 30 then
+    set fine1 = ((noofdays - 30) * 50) + 30 * 5;
+    insert into fine values(roll, curdate(), fine1);
+  else
+    insert into fine values(roll, curdate(), 0);
+  end if;
+  
+  update borrower set status = 'R' where rollno = roll;
+end $
+
+
+call calc_fine_lib(1);
+call calc_fine_lib(2);
+call calc_fine_lib(3);
+call calc_fine_lib(4);
+call calc_fine_lib(5);
+select * from fine;
+call calc_fine_lib(1)$
+
+SELECT * FROM fine;
+SELECT * FROM borrower;
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+Group A- 5  
+PL/SQL Stored Procedure and Stored Function.
+Write a Stored Procedure namely proc_Grade for the categorization of
+student. If marks scored by students in examination is &lt;=1500 and
+marks&gt;=990 then student will be placed in distinction category if marks
+scored are between 989 and900 category is first class, if marks 899 and
+825 category is Higher Second Class.
+Write a PL/SQL block for using procedure created with above
+requirement.
+Stud_Marks(name, total_marks)
+Result(Roll,Name, Class)
+Frame the separate problem statement for writing PL/SQL Stored
+Procedure and function, inline with above statement. The problem
+statement should clearly state the requirements.
+
+
+CREATE TABLE result(roll_no int, name varchar(20), class varchar(20));
+CREATE TABLE marks(roll_no int, name varchar(20), total_marks int);
+INSERT INTO marks VALUES(1, 'Abhi', 1400);
+INSERT INTO marks VALUES(2, 'piyush', 980);
+INSERT INTO marks VALUES(3, 'hitesh', 880);
+INSERT INTO marks VALUES(4, 'ashley', 820);
+INSERT INTO marks VALUES(5, 'partik', 740);
+INSERT INTO marks VALUES(6, 'patil', 640);
+DELIMITER //
+CREATE PROCEDURE proc_result(IN marks INT, OUT class CHAR(20))
+BEGIN
+  IF (marks > 990) THEN
+    SET class = 'Distinction';
+  ELSEIF (marks > 890) THEN
+    SET class = 'First Class';
+  ELSEIF (marks > 825) THEN
+    SET class = 'Higher Second Class';
+  ELSEIF (marks > 750) THEN
+    SET class = 'Second Class';
+  ELSEIF (marks > 650) THEN
+    SET class = 'Passed';
+  ELSE
+    SET class = 'Fail';
+  END IF;
+END;
+//
+CREATE FUNCTION final_result4(R1 INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE fmarks INT;
+  DECLARE grade VARCHAR(20);
+  DECLARE stud_name VARCHAR(20);
+  SELECT total_marks, name INTO fmarks, stud_name FROM marks WHERE roll_no = R1;
+  CALL proc_result(fmarks, @grade);
+  INSERT INTO result VALUES(R1, stud_name, @grade);
+  RETURN R1;
+END;
+//
+SELECT final_result4(2);
+SELECT final_result4(3);
+SELECT final_result4(4);
+SELECT final_result4(5);
+SELECT * FROM result;
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+Group A 6
+Write a PL/SQL block of code using parameterized cursor that will merge the data available in newly created table N_RollCall with the data available in the O_RollCall. If the data in the first table already exists in the second table then that data should be skipped.
+
+
+create database kiran;
+use kiran;
+
+create table o_rollcall(roll_no int,name varchar(20),address varchar(20));
+create table n_rollcall(roll_no int,name varchar(20),address varchar(20));
+insert into o_rollcall values('1','Hitesh','Nandura');
+insert into o_rollcall values('2','Piyush','MP');
+insert into o_rollcall values('3','Ashley','Nsk');
+insert into o_rollcall values('4','Kalpesh','Dhule');
+insert into o_rollcall values('5','Abhi','Satara');
+
+delimiter //
+create procedure p3(in r1 int)
+begin
+declare r2 int;
+declare exit_loop boolean;
+declare c1 cursor for select roll_no from o_rollcall where roll_no>r1;
+declare continue handler for not found set exit_loop=true;
+open c1;
+e_loop:loop
+fetch c1 into r2;
+if not exists(select * from n_rollcall where roll_no=r2)
+then
+insert into n_rollcall select * from o_rollcall where roll_no=r2;
+end if;
+if exit_loop
+then
+close c1;
+leave e_loop;
+end if;
+end loop e_loop;
+end //
+select * from n_rollcall;
+//
+call p3(0);
+//
+select * from n_rollcall;
+//
+insert into o_rollcall values('6','Patil','Kolhapur');
+//
+call p3(4);
+//
+select * from n_rollcall;
+//
+
+----------------------------------------------------------------------------------------------------------------------
+Group A Lab Assignment 7
+Database Trigger (All Types: Row level and Statement level triggers, Before and After Triggers). Write a database trigger on Library table. The System should keep track of the records that are being updated or deleted. The old value of updated or deleted records should be added in Library_Audit table.Frame the problem statement for writing Database Triggers of all types, in-line with above statement. The problem statement should clearly state the requirements.
+
+-- Switch to the 'info' database.
+use info;
+
+-- Create the 'borrower2' table.
+create table borrower2(
+    roll_no int,
+    name varchar(20),
+    date_of_issue date,
+    book varchar(20),
+    status varchar(20),
+    author varchar(20)
+);
+
+-- Insert data into the 'borrower2' table.
+insert into borrower2 values(1, 'nick', '2018-06-10', 'wings_of_fire', 'avaliable', 'APJ');
+insert into borrower2 values(2, 'mira', '2018-05-11', 'leaves_life', 'not_avaliable', 'borwarkar');
+insert into borrower2 values(3, 'rina', '2018-02-12', 'unusal', 'avaliable', 'johar');
+insert into borrower2 values(4, 'harsha', '2018-06-20', 'skylimit', 'avaliable', 'ingale');
+insert into borrower2 values(5, 'tej', '2018-04-20', 'highway', 'not_avaliable', 'klm');
+
+-- Select data from the 'borrower1' table (please double-check the correct table name).
+select * from borrower1;
+
+-- Set the delimiter to define triggers.
+delimiter //
+
+-- Create an 'AFTER INSERT' trigger for the 'borrower1' table.
+create trigger library after insert on borrower1 for each row
+begin
+    insert into audit1 values(new.roll_no, new.name, new.date_of_issue, new.book_name, new.status, new.author, current_timestamp);
+end;
+//
+
+-- Insert data into the 'borrower1' table (please make sure 'borrower1' exists).
+insert into borrower1 values(6, 'xyz', '2018-09-06', 'aaa', 'avaliable', 'xxx');
+
+-- Select data from the 'borrower1' table (please double-check the correct table name).
+select * from borrower1;
+
+-- Select data from the 'audit1' table (please double-check the correct table name).
+select * from audit1;
+
+-- Set the delimiter to define triggers.
+delimiter //
+
+-- Create an 'AFTER UPDATE' trigger for the 'borrower1' table.
+create trigger library1 after update on borrower1 for each row
+begin
+    insert into audit1 values(new.roll_no, new.name, new.date_of_issue, new.book_name, new.status, new.author, current_timestamp);
+end;
+//
+
+-- Update data in the 'borrower1' table.
+update borrower1 set roll_no = 8, book_name = 'leaf' where name = 'xyz';
+
+-- Select data from the 'borrower1' table (please double-check the correct table name).
+select * from borrower1;
+
+---------------------------------------------------------------------------------------------------------------------
+Group B : Lab Assignment no. 1
+
+Design and Develop MongoDB Queries using CRUD operations. (Use CRUD operations, SAVE method, logical operators)
+
+use kiran;
+db.createCollection('Student');
+db.Student.insert({'Rno':'1', 'Name':'Piyush', 'Class':'TE COMP'});
+db.Student.insert({'Rno':'2', 'Name':'Abhi', 'Class':'TE COMP'});
+db.Student.insert({'Rno':'3', 'Name':'Ashley', 'Class':'TE COMP'});
+db.Student.insert({'Rno':'4', 'Name':'Hitesh', 'Class':'TE COMP'});
+db.Student.insert({'Rno':'5', 'Name':'Pratik', 'Class':'TE COMP'});
+db.Student.insert({'Rno':'6', 'Name':'Pratik', 'Class':'TE COMP'});
+
+db.Student.find();
+
+db.Student.find().pretty();
+
+db.Student.update({'Name':'Hitesh'}, {$set: {'Name':'Henry'}});
+db.Student.find().pretty();
+
+db.Student.remove({'Rno': '1', 'NAME': 'PIYUSH', 'CLASS': 'TE COMP', 'ADD': 'MP'});
+
+db.Student.find().pretty();
+
+db.Student.find({$and: [{"Name": "Piyush"}, {"Rno": "1"}]}).pretty();
+
+db.Student.find({$and: [{"Name": "Piyush"}, {"Rno": "2"}]}).pretty();
+
+db.Student.find({$or: [{"Name": "Piyush"}, {"Rno": "2"}]}).pretty();
+
+db.Student.find({$or: [{"Name": "Piyush"}, {"Class": "TE COMP"}]}).pretty();
+
+db.Student.find({$nor: [{"Name": "Piyush"}, {"Class": "TE COMP"}]}).pretty();
+
+db.Student.find({$nor: [{"Name": "Piyush"}, {"Rno": "2"}]}).pretty();
+
+db.Student.find({"Rno": {$not: {$lt: "3"}}}).pretty();
+
+db.Student.find({"Rno": {$eq: "5"}}).pretty();
+
+db.Student.find({"Rno": {$ne: "5"}}).pretty();
+
+db.Student.find({"Rno": {$gt: "5"}}).pretty();
+
+db.Student.find({"Rno": {$gte: "5"}}).pretty();
+
+db.Student.find({"Rno": {$lt: "5"}}).pretty();
+
+db.Student.find({"Rno": {$lte: "5"}}).pretty();
+
+db.Student.find({"Rno": {$lt: "5", $gt: "2"}}).pretty();
+
+db.Student.find({"Rno": {$lte: "5", $gte: "2"}}).pretty();
+
+db.Student.find({"Rno": {$lt: "5", $gte: "2"}}).pretty();
+
+
+--------------------------------------------------------------------------------------------------------------------
+group b 2 Implement aggregation and indexing with suitable example using MongoDBs
